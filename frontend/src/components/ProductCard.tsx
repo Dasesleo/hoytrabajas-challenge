@@ -1,4 +1,5 @@
 import { Product } from "@/types/product";
+import { AddToCartButton } from "./AddToCartButton";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -7,9 +8,12 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="font-medium">{product.name}</p>
         <p className="text-sm text-gray-500">ID: {product.id}</p>
       </div>
-      <span className="rounded bg-gray-100 px-2 py-1 font-semibold">
-        ${product.price}
-      </span>
+      <div className="flex items-center gap-4">
+        <span className="rounded bg-gray-100 px-2 py-1 font-semibold">
+          ${product.price}
+        </span>
+        <AddToCartButton productId={product.id} />
+      </div>
     </li>
   );
 }
