@@ -10,6 +10,11 @@
 - Node.js (recomendado: LTS)
 - pnpm
 
+## Configuración
+
+Crear un archivo `.env.local` en la carpeta `frontend` con:
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+
 ## Ejecutar
 
 1. Instalar dependencias:
@@ -21,5 +26,5 @@ pnpm install
 2. Levantar el servidor:
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
