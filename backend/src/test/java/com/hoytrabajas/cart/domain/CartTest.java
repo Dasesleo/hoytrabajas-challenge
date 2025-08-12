@@ -13,8 +13,8 @@ class CartTest {
         cart.add(p);
         cart.add(p);
 
-        assertEquals(1, cart.items().size(), "Should keep one line per product");
-        assertEquals(2, cart.items().get(0).quantity(), "Quantity should increment");
+        assertEquals(1, cart.getItems().size(), "Should keep one line per product");
+        assertEquals(2, cart.getItems().get(0).quantity(), "Quantity should increment");
     }
 
     @Test
@@ -26,6 +26,6 @@ class CartTest {
         cart.add(p1);
         cart.add(p4);
 
-        assertEquals(130, cart.total(), "Total should be 60 + 70 = 130");
+        assertEquals(130, cart.getTotal(), "Total should be 60 + 70 = 130");
     }
 }

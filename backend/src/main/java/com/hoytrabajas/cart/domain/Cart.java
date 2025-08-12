@@ -7,7 +7,7 @@ import java.util.List;
 public class Cart {
     private final List<CartItem> items = new ArrayList<>();
 
-    public List<CartItem> items() {
+    public List<CartItem> getItems() {
         return Collections.unmodifiableList(items);
     }
 
@@ -39,7 +39,7 @@ public class Cart {
         items.add(new CartItem(product, quantity));
     }
 
-    public int total() {
+    public int getTotal() {
         int sum = 0;
         for (var it : items)
             sum += it.lineTotal();
