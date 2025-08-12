@@ -1,38 +1,40 @@
-"use client";
+import { apiGet } from "@/lib/api";
+import { Product } from "@/types/product";
+import { ProductList } from "@/components/ProductList";
 
-import { useEffect, useState } from "react";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
+async function getProducts(): Promise<Product[]> {
+  return apiGet<Product[]>("/products");
 }
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+export default async function Home() {
+  let products: Product[] = [];
+  let error: string | null = null;
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
-      );
-      const data = await response.json();
-      setProducts(data);
-    }
-
-    fetchProducts();
-  }, []);
+  try {
+    products = await getProducts();
+  } catch (e) {
+    error = (e as Error).message ?? "Error desconocido al obtener productos";
+  }
 
   return (
-    <div>
-      <h1>Productos</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - ${product.price}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <main className="mx-auto max-w-2xl p-6">
+      <h1 className="text-2xl font-bold">Productos</h1>
+      <p className="mt-1 text-sm text-gray-600">
+        Backend:&nbsp;
+        <code className="rounded bg-gray-100 px-1 py-0.5">
+          {process.env.NEXT_PUBLIC_API_BASE_URL}
+        </code>
+      </p>
+
+      <section className="mt-6">
+        {error ? (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            Error cargando productos: {error}
+          </div>
+        ) : (
+          <ProductList products={products} />
+        )}
+      </section>
+    </main>
   );
 }
