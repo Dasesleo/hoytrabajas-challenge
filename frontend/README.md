@@ -4,6 +4,7 @@
 
 - Configuración inicial de Next.js con TypeScript.
 - Consumo de la API backend para mostrar productos.
+- Home muestra lista de productos y permite "Agregar al carrito" (POST /api/cart con X-Cart-Id en localStorage).
 
 ## Requisitos
 
