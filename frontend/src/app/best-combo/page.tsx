@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { findBestCombination, ComboProduct } from "@/lib/findBestCombination";
+import NumericInput from "@/components/NumericInput";
 
 const DATASET: ComboProduct[] = [
   { id: 1, name: "Producto 1", price: 60 },
@@ -15,16 +16,20 @@ function sum(arr: ComboProduct[]) {
 }
 
 export default function BestComboPage() {
-  const [budget, setBudget] = useState<number>(150);
+  const [budgetInput, setBudgetInput] = useState<string>("");
+
+  const budgetNumber = useMemo(() => {
+    return budgetInput === "" ? 0 : parseInt(budgetInput, 10);
+  }, [budgetInput]);
 
   const result = useMemo(() => {
-    return findBestCombination(DATASET, Number.isFinite(budget) ? budget : 0);
-  }, [budget]);
+    return findBestCombination(DATASET, budgetNumber);
+  }, [budgetNumber]);
 
   const total = sum(result);
 
   return (
-    <main className="mx-auto max-w-2xl p-6">
+    <main className="mx-auto max-w-4xl p-6">
       <h1 className="text-2xl font-bold">Mejor combinación</h1>
       <p className="mt-2 text-sm text-gray-600">
         Ingresa un presupuesto y calcula la mejor combinación (sin excederlo),
@@ -38,13 +43,12 @@ export default function BestComboPage() {
         <label className="text-sm text-gray-700" htmlFor="budget">
           Presupuesto
         </label>
-        <input
+        <NumericInput
           id="budget"
-          type="number"
-          min={0}
-          value={budget}
-          onChange={(e) => setBudget(parseInt(e.target.value || "0", 10))}
-          className="w-32 rounded border px-3 py-1"
+          placeholder="Ej: 150"
+          value={budgetInput}
+          onChange={setBudgetInput}
+          className="w-32 rounded border px-3 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
         />
       </form>
 
@@ -76,21 +80,6 @@ export default function BestComboPage() {
           </>
         )}
       </section>
-
-      <details className="mt-6 cursor-pointer">
-        <summary className="text-sm text-gray-700">Dataset del PDF</summary>
-        <pre className="mt-2 rounded bg-gray-100 p-3 text-xs">
-          {`[
-  { "id": 1, "name": "Producto 1", "price": 60 },
-  { "id": 2, "name": "Producto 2", "price": 100 },
-  { "id": 3, "name": "Producto 3", "price": 120 },
-  { "id": 4, "name": "Producto 4", "price": 70 }
-]`}
-        </pre>
-        <p className="mt-2 text-xs text-gray-600">
-          Ejemplo esperado: presupuesto 150 → Productos 1 y 4, total 130.
-        </p>
-      </details>
     </main>
   );
 }

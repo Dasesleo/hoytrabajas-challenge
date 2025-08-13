@@ -30,16 +30,25 @@ export function CartLink() {
 
   useEffect(() => {
     fetchCount();
-
     const onUpdated = () => fetchCount();
     window.addEventListener("cart:updated", onUpdated);
     return () => window.removeEventListener("cart:updated", onUpdated);
   }, [fetchCount]);
 
   return (
-    <Link href="/cart" className="relative inline-flex items-center gap-2">
-      <span className="rounded bg-gray-100 px-2 py-1">Carrito</span>
-      <span className="text-sm text-gray-600">({count})</span>
+    <Link
+      href="/cart"
+      className="relative inline-flex items-center gap-2 rounded px-2 py-1 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+      aria-label={`Abrir carrito. ${count} artículo${count === 1 ? "" : "s"}`}
+    >
+      <span className="font-medium">Carrito</span>
+      <span
+        className="grid min-w-5 place-items-center rounded-full bg-blue-600 px-1.5 text-xs font-bold text-white"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {count}
+      </span>
     </Link>
   );
 }

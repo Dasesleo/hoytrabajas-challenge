@@ -1,9 +1,5 @@
 export type ComboProduct = { id: number; name: string; price: number };
 
-/**
- * Devuelve la combinación de productos con mayor suma <= budget.
- * Regla: cada producto se puede usar 0 o 1 vez (como en el PDF).
- */
 export function findBestCombination(
   products: ComboProduct[],
   budget: number
