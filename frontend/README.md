@@ -2,9 +2,12 @@
 
 ## Scope de este módulo
 
-- Configuración inicial de Next.js con TypeScript.
-- Consumo de la API backend para mostrar productos.
-- Home muestra lista de productos y permite "Agregar al carrito" (POST /api/cart con X-Cart-Id en localStorage).
+- Next.js (App Router) + TypeScript + Tailwind + ESLint.
+- Consumo de la API backend:
+  - **Listar productos** desde `GET /api/products`.
+  - **Agregar al carrito** con `POST /api/cart` enviando `X-Cart-Id` (persistido en `localStorage`).
+  - **Ver carrito** en `/cart`: items (producto, precio, cantidad, subtotal) y **total**.
+- **Navbar** con enlace a `/cart` y **contador** de ítems (se actualiza tras agregar).
 
 ## Requisitos
 
