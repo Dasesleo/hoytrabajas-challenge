@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { findBestCombination, ComboProduct } from "@/lib/findBestCombination";
+import NumericInput from "@/components/NumericInput";
 
 const DATASET: ComboProduct[] = [
   { id: 1, name: "Producto 1", price: 60 },
@@ -18,9 +19,7 @@ export default function BestComboPage() {
   const [budgetInput, setBudgetInput] = useState<string>("");
 
   const budgetNumber = useMemo(() => {
-    const digitsOnly = budgetInput.replace(/\D+/g, "");
-    const withoutLeading = digitsOnly.replace(/^0+(?!$)/, "");
-    return withoutLeading === "" ? 0 : parseInt(withoutLeading, 10);
+    return budgetInput === "" ? 0 : parseInt(budgetInput, 10);
   }, [budgetInput]);
 
   const result = useMemo(() => {
@@ -44,13 +43,11 @@ export default function BestComboPage() {
         <label className="text-sm text-gray-700" htmlFor="budget">
           Presupuesto
         </label>
-        <input
+        <NumericInput
           id="budget"
-          inputMode="numeric"
-          pattern="[0-9]*"
           placeholder="Ej: 150"
           value={budgetInput}
-          onChange={(e) => setBudgetInput(e.target.value)}
+          onChange={setBudgetInput}
           className="w-32 rounded border px-3 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
         />
       </form>
