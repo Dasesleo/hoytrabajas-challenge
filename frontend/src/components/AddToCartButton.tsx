@@ -24,6 +24,10 @@ export function AddToCartButton({ productId }: Props) {
         { "X-Cart-Id": cartId }
       );
       setOk(true);
+
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("cart:updated"));
+      }
     } catch (e) {
       setErr((e as Error).message ?? "Error agregando");
     } finally {
