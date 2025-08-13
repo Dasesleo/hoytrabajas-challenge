@@ -17,14 +17,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-6">
-      <h1 className="text-2xl font-bold">Productos</h1>
-      <p className="mt-1 text-sm text-gray-600">
-        Backend:&nbsp;
-        <code className="rounded bg-gray-100 px-1 py-0.5">
-          {process.env.NEXT_PUBLIC_API_BASE_URL}
-        </code>
-      </p>
+    <main className="mx-auto max-w-4xl p-6">
+      <header>
+        <h1 className="text-2xl font-bold">Productos</h1>
+      </header>
 
       <section className="mt-6">
         {error ? (
