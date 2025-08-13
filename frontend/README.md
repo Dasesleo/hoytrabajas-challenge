@@ -8,6 +8,10 @@
   - **Agregar al carrito** con `POST /api/cart` enviando `X-Cart-Id` (persistido en `localStorage`).
   - **Ver carrito** en `/cart`: items (producto, precio, cantidad, subtotal) y **total**.
 - **Navbar** con enlace a `/cart` y **contador** de ítems (se actualiza tras agregar).
+- Página **`/best-combo`**:
+  - Permite ingresar un presupuesto y calcula la mejor combinación de productos sin excederlo.
+  - Usa el dataset del reto y la función `findBestCombination`.
+  - Ejemplo: presupuesto **150** → productos 1 y 4, total **130**.
 
 ## Requisitos
 
